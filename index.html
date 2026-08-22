@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MiAsistente Care</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f4f4f9; margin: 0; padding: 0; display: flex; flex-direction: column; height: 100vh; }
+    header { background: #d32f2f; color: white; padding: 15px; text-align: center; font-weight: bold; font-size: 18px; }
+    .chat-box { flex: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; }
+    .message { max-width: 80%; padding: 10px 14px; border-radius: 12px; font-size: 14px; line-height: 1.4; }
+    .bot { background: #e0e0e0; color: #333; align-self: flex-start; }
+    .user { background: #d32f2f; color: white; align-self: flex-end; }
+    .input-area { display: flex; padding: 10px; background: white; border-top: 1px solid #ccc; }
+    input { flex: 1; padding: 10px; border: 1px solid #ccc; border-radius: 20px; outline: none; }
+    button { margin-left: 8px; background: #d32f2f; color: white; border: none; padding: 10px 15px; border-radius: 20px; font-weight: bold; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <header>MiAsistente Care - IA Postventa</header>
+  <div class="chat-box" id="chat">
+    <div class="message bot">¡Hola! Soy tu asistente de servicio postventa y soporte técnico. ¿En qué puedo ayudarte hoy con tu dispositivo?</div>
+  </div>
+  <div class="input-area">
+    <input type="text" id="userInput" placeholder="Escribe tu consulta...">
+    <button onclick="sendMsg()">Enviar</button>
+  </div>
+  <script>
+    function sendMsg() {
+      const inp = document.getElementById('userInput');
+      const chat = document.getElementById('chat');
+      if (!inp.value.trim()) return;
+      
+      const userDiv = document.createElement('div');
+      userDiv.className = 'message user';
+      userDiv.innerText = inp.value;
+      chat.appendChild(userDiv);
+      
+      const text = inp.value;
+      inp.value = '';
+      chat.scrollTop = chat.scrollHeight;
+
+      setTimeout(() => {
+        const botDiv = document.createElement('div');
+        botDiv.className = 'message bot';
+        botDiv.innerText = 'Entendido. Procesando tu solicitud sobre: "' + text + '". ¿Deseas agendar una cita de soporte presencial?';
+        chat.appendChild(botDiv);
+        chat.scrollTop = chat.scrollHeight;
+      }, 800);
+    }
+  </script>
+</body>
+</html>
